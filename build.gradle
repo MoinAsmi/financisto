@@ -3,16 +3,16 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:7.3.0'
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
 }
@@ -29,6 +29,17 @@ subprojects {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
         } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        }
+        if (project.plugins.hasPlugin("com.android.application") || project.plugins.hasPlugin("com.android.library")) {
+            // Work around Robolectric Java 11 issues.
+            android.testOptions.unitTests.all {
+                // https://github.com/robolectric/robolectric/issues/5115
+                systemProperty 'javax.net.ssl.trustStoreType', 'JKS'
+
+                // https://github.com/robolectric/robolectric/issues/5456
+                systemProperty 'robolectric.dependency.repo.id', 'central'
+                systemProperty 'robolectric.dependency.repo.url', 'https://repo1.maven.org/maven2'
+            }
         }
     }
 }
