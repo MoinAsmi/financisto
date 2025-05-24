@@ -14,6 +14,9 @@ allprojects {
     repositories {
         mavenCentral()
         google()
+        maven {
+            url "https://maven.scijava.org/content/repositories/public"
+        }
     }
 }
 

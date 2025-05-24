@@ -108,7 +108,13 @@ public enum ReportType implements SummaryEntityEnum {
 		public boolean isConventionalBarReport() {
 			return false;
 		}
-	};
+	},
+	PURIFICATION(R.string.report_by_purification, R.string.report_by_purification_summary, R.drawable.report_icon_default) {
+        @Override
+        public Report createReport(Context context, Currency currency) {
+            return new PurificationReport(context, currency);
+        }
+    };
 	
 	public final int titleId;
 	public final int summaryId;

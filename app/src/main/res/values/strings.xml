@@ -147,7 +147,9 @@
     <string name="select_report">Please select report…</string>
     <string name="overall">Overall</string>
     <string name="report_by_period">By Period</string>
-    <string name="report_by_period_summary">Transactions report by period</string>
+    <string name="report_by_period_summary">Total income and expense by period</string>
+    <string name="report_by_purification">Purification Report</string>
+    <string name="report_by_purification_summary">Summary of purification calculations</string>
     <string name="report_by_category">By Category</string>
     <string name="report_by_category_summary">Transactions report by category</string>
     <string name="report_by_location">By Location</string>

@@ -90,6 +90,7 @@ public class ReportsListActivity extends ListActivity {
 
 		reports.add(ReportType.BY_PERIOD);
 		reports.add(ReportType.BY_CATEGORY);
+		reports.add(ReportType.PURIFICATION);  // Add purification report
 
 		if (MyPreferences.isShowPayee(getBaseContext())) {
 			reports.add(ReportType.BY_PAYEE);
