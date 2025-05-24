@@ -43,11 +43,17 @@ public class TransactionsListAdapter extends BlotterListAdapter {
         String toAccount = cursor.getString(BlotterColumns.to_account_title.ordinal());
         long fromAmount = cursor.getLong(BlotterColumns.from_amount.ordinal());
         if (toAccountId > 0) {
-            v.topView.setText(R.string.transfer);
+
+            String append;
             if (fromAmount > 0) {
-                note = toAccount+" \u00BB";
+                append = " from " + toAccount;
             } else {
-                note = "\u00AB "+toAccount;
+                append = " to " + toAccount;
+            }
+            String transferTitle = context.getString(R.string.transfer) + append;
+            v.topView.setText(transferTitle);
+            if (note == null || note.isEmpty()) {
+                note = transferTitle;
             }
         } else {
             String title = cursor.getString(BlotterColumns.from_account_title.ordinal());
