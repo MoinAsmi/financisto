@@ -1,1 +1,38 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://maven.scijava.org/content/repositories/public" }
+    }
+}
+
+rootProject.name = "financisto"
 include ':app'
+include ':app-modern'
+
+// Storage modules
+include ':storage-api'
+include ':storage-impl'
+
+// Repository modules
+include ':repository-api'
+include ':repository-impl'
+
+// Use case modules
+include ':usecase-api'
+include ':usecase-impl'
+
+// Feature modules
+include ':features:account-list'
+
+// Navigation
+include ':navigation'
