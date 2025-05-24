@@ -9,7 +9,7 @@ import com.moin.financisto.data.entities.User
 
 @Dao
 interface AccountDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertAccount(account: Account)
 
     @Query("SELECT * FROM accounts")
@@ -18,7 +18,7 @@ interface AccountDao {
 
 @Dao
 interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertUser(user: User)
 
     @Query("SELECT * FROM users")

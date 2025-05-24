@@ -31,7 +31,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.moin.financisto.data.entities.Account
+import com.moin.financisto.data.entities.AccountType
 import com.moin.myfinancisto.ui.theme.FinancistoTheme
+import com.moin.myfinancisto.view.components.AccountListItem
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,10 +70,38 @@ fun FinancistoApp() {
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
     val context = LocalContext.current
-    Column {
-        ItemList(itemsList = viewModel.state.value.toItemList())
-        Button(onClick = { viewModel.fetchItems(context) }) {
-
+    LazyColumn {
+        items(viewModel.state.value) {
+            AccountListItem(it)
+        }
+        item {
+            Button(onClick = { viewModel.fetchItems(context) }) {
+                Text("Fetch accounts")
+            }
+        }
+        item {
+            Button(onClick = { viewModel.createNewAccount(context, Account(
+                accountId = 2,
+                userId = 1,
+                name = "Cash",
+                balance = 170,
+                isActive = true,
+                accountType = AccountType.Cash,
+                creditLimit = 600
+            )) }) {
+                Text("Create new account")
+            }
+            Button(onClick = { viewModel.createNewAccount(context, Account(
+                accountId = 3,
+                userId = 1,
+                name = "JK Bank",
+                balance = 45900,
+                isActive = true,
+                accountType = AccountType.BankAccount,
+                creditLimit = 600
+            )) }) {
+                Text("Create new account")
+            }
         }
     }
 

@@ -8,7 +8,7 @@ repositories {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdk 34
 
     defaultConfig {
         applicationId "ru.orangesoftware.financisto"
@@ -29,7 +29,11 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            jniDebuggable false
+            shrinkResources true
+            minifyEnabled true
+            crunchPngs true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

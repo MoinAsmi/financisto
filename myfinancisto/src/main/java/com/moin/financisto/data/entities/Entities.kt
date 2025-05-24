@@ -93,10 +93,14 @@ data class ExpenseType(
     ]
 )
 data class Account(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
     val accountId: Long = 0,
     val userId: Long,
-    val name: String
+    val name: String,
+    val isActive: Boolean,
+    val balance: Long,
+    val accountType: AccountType = AccountType.Cash,
+    val creditLimit: Long = 0
 )
 
 @Entity(
