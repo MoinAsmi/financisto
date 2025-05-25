@@ -42,7 +42,7 @@ data class AccountEntity(
     val creationDate: Long,
     val lastModified: Long = System.currentTimeMillis()
 ) {
-    fun toDomain(currency: CurrencyModel): AccountModel = AccountModel(
+    fun toDomain(currency: CurrencyModel? = null): AccountModel = AccountModel(
         id = id,
         title = title,
         type = type,
@@ -69,7 +69,7 @@ data class AccountEntity(
             id = model.id,
             title = model.title,
             type = model.type,
-            currencyId = model.currency.id,
+            currencyId = model.currency?.id ?: -1,
             totalAmount = model.totalAmount,
             sortOrder = model.sortOrder,
             isActive = model.isActive,

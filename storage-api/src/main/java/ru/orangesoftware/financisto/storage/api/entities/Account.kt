@@ -4,7 +4,7 @@ data class Account(
     val id: Long = 0,
     val title: String,
     val type: String,
-    val currency: Currency,
+    val currency: Currency?,
     val totalAmount: Long,
     val sortOrder: Int,
     val isActive: Boolean,

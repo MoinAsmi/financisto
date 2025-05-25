@@ -1,7 +1,12 @@
+import org.gradle.api.JavaVersion
+
 object Versions {
+    // Languages and Tooling
+    const val jvmTarget = "1.8"
     const val kotlin = "1.8.20"
     const val androidGradlePlugin = "8.0.0"
     
+    // SDK Versions
     const val compileSdk = 33
     const val minSdk = 21
     const val targetSdk = 33
@@ -64,5 +69,16 @@ object Deps {
     
     object Logging {
         const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    }
+}
+
+object Config {
+    val javaVersion = JavaVersion.VERSION_11
+    const val jvmTarget = Versions.jvmTarget
+    
+    object Android {
+        const val compileSdk = Versions.compileSdk
+        const val minSdk = Versions.minSdk
+        const val targetSdk = Versions.targetSdk
     }
 }

@@ -9,28 +9,13 @@ class AccountDaoImpl(
     private val accountRoomDao: AccountRoomDao
 ) : AccountDao {
     override fun getAccounts(): Flow<List<Account>> =
-        accountRoomDao.getAccountsWithCurrency()
-            .map { accountsWithCurrency ->
-                accountsWithCurrency.map { (account, currency) ->
-                    account.toDomain(currency.toDomain())
-                }
-            }
+        accountRoomDao.getAccounts().map { it.map { accountEntity -> accountEntity.toDomain() } }
 
     override fun getActiveAccounts(): Flow<List<Account>> =
-        accountRoomDao.getActiveAccountsWithCurrency()
-            .map { accountsWithCurrency ->
-                accountsWithCurrency.map { (account, currency) ->
-                    account.toDomain(currency.toDomain())
-                }
-            }
+        accountRoomDao.getActiveAccounts().map { it.map { accountEntity -> accountEntity.toDomain() } }
 
     override fun getAccountById(id: Long): Flow<Account?> =
-        accountRoomDao.getAccountWithCurrencyById(id)
-            .map { accountWithCurrency ->
-                accountWithCurrency?.let { (account, currency) ->
-                    account.toDomain(currency.toDomain())
-                }
-            }
+        accountRoomDao.getAccountById(id).map { it.toDomain() }
 
     override suspend fun insert(account: Account): Long =
         accountRoomDao.insert(AccountEntity.fromDomain(account))
