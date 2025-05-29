@@ -11,12 +11,12 @@ interface AccountRoomDao {
     fun getAccounts(): Flow<List<AccountEntity>>
 
     @Transaction
-    @Query("SELECT * FROM accounts WHERE isActive = 1 ORDER BY sortOrder, title")
-    fun getActiveAccounts(): Flow<List<AccountEntity>>
+    @Query("SELECT * FROM accounts WHERE isActive = :isActive ORDER BY sortOrder, title")
+    fun getAccountsByStatus(isActive: Int): Flow<List<AccountEntity>>
 
     @Transaction
     @Query("SELECT * FROM accounts WHERE id = :id")
-    fun getAccountById(id: Long): Flow<AccountEntity>
+    fun getAccountById(id: Long): AccountEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(account: AccountEntity): Long

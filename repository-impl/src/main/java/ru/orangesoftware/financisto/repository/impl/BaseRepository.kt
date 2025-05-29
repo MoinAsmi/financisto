@@ -18,8 +18,10 @@ abstract class BaseRepository {
         }
     }
 
-    protected suspend fun <T> execute(block: suspend () -> T): RepositoryResult<T> = try {
-        RepositoryResult.Success(block())
+    protected suspend fun <T> execute(block: suspend () -> T?): RepositoryResult<T> = try {
+        block()?.let {
+            RepositoryResult.Success(it)
+        } ?: RepositoryResult.Error(Exception("Null result"))
     } catch (e: Exception) {
         RepositoryResult.Error(mapException(e))
     }

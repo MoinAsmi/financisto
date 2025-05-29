@@ -10,9 +10,9 @@ fun StorageAccount.toDomain(): Account {
     return Account(
         id = id,
         title = title,
-        currencyId = currencyId,
+        currencyId = currency?.id ?: -1,
         totalAmount = totalAmount,
-        type = AccountType.valueOf(type.name),
+        type = AccountType.valueOf(type),
         isActive = isActive,
         sortOrder = sortOrder,
         note = note,
@@ -21,9 +21,9 @@ fun StorageAccount.toDomain(): Account {
         limitAmount = limitAmount,
         cardIssuer = cardIssuer?.let { issuer ->
             when (type) {
-                StorageAccount.Type.CREDIT_CARD,
-                StorageAccount.Type.DEBIT_CARD -> CardIssuer.valueOf(issuer).name
-                StorageAccount.Type.ELECTRONIC -> ElectronicPaymentType.valueOf(issuer).name
+                AccountType.CREDIT_CARD.name,
+                AccountType.DEBIT_CARD.name -> CardIssuer.valueOf(issuer).name
+                AccountType.ELECTRONIC_MONEY.name -> ElectronicPaymentType.valueOf(issuer).name
                 else -> issuer
             }
         },
@@ -36,9 +36,9 @@ fun Account.toStorage(): StorageAccount {
     return StorageAccount(
         id = id,
         title = title,
-        currencyId = currencyId,
+        currency = null,
         totalAmount = totalAmount,
-        type = StorageAccount.Type.valueOf(type.name),
+        type = type.name,
         isActive = isActive,
         sortOrder = sortOrder,
         note = note,
@@ -47,6 +47,11 @@ fun Account.toStorage(): StorageAccount {
         limitAmount = limitAmount,
         cardIssuer = cardIssuer,
         issuer = issuer,
-        number = number
+        number = number,
+        isIncludeIntoTotals = false,
+        lastReconciliationDate = -1,
+        closingDay = -1,
+        paymentDay = -1,
+        lastModified = -1
     )
 }

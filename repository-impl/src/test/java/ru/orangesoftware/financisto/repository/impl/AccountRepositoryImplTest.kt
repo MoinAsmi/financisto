@@ -70,7 +70,7 @@ class AccountRepositoryImplTest {
     fun `saveAccount should insert new account when id is 0`() = runTest {
         // Given
         val account = createDomainAccount(0)
-        coEvery { accountDao.insertAccount(any()) } returns 1L
+        coEvery { accountDao.insert(any()) } returns 1L
 
         // When
         val result = repository.saveAccount(account)
@@ -79,14 +79,14 @@ class AccountRepositoryImplTest {
         assertThat(result).isInstanceOf(RepositoryResult.Success::class.java)
         result as RepositoryResult.Success
         assertThat(result.data).isEqualTo(1L)
-        coVerify { accountDao.insertAccount(any()) }
+        coVerify { accountDao.insert(any()) }
     }
 
     @Test
     fun `saveAccount should update existing account when id is not 0`() = runTest {
         // Given
         val account = createDomainAccount(1)
-        coEvery { accountDao.updateAccount(any()) } returns Unit
+        coEvery { accountDao.update(any()) } returns Unit
 
         // When
         val result = repository.saveAccount(account)
@@ -95,20 +95,20 @@ class AccountRepositoryImplTest {
         assertThat(result).isInstanceOf(RepositoryResult.Success::class.java)
         result as RepositoryResult.Success
         assertThat(result.data).isEqualTo(1L)
-        coVerify { accountDao.updateAccount(any()) }
+        coVerify { accountDao.update(any()) }
     }
 
     @Test
     fun `deleteAccount should return success when deletion is successful`() = runTest {
         // Given
-        coEvery { accountDao.deleteAccount(1) } returns Unit
+        coEvery { accountDao.delete(1) } returns Unit
 
         // When
         val result = repository.deleteAccount(1)
 
         // Then
         assertThat(result).isInstanceOf(RepositoryResult.Success::class.java)
-        coVerify { accountDao.deleteAccount(1) }
+        coVerify { accountDao.delete(1) }
     }
 
     @Test
@@ -130,10 +130,23 @@ class AccountRepositoryImplTest {
     ) = StorageAccount(
         id = id,
         title = "Account $id",
-        type = StorageAccount.Type.CASH,
-        currencyId = 1,
+        type = AccountType.CASH.name,
         totalAmount = 0,
-        isActive = isActive
+        isActive = isActive,
+        currency = null,
+        sortOrder = 1,
+        isIncludeIntoTotals = true,
+        lastTransactionDate = 0,
+        lastReconciliationDate = 0,
+        closingDay = 0,
+        paymentDay = 0,
+        note = "TODO()",
+        limitAmount = 20,
+        cardIssuer = "TODO()",
+        issuer = "TODO()",
+        number = "12",
+        creationDate = 1,
+        lastModified = 2
     )
 
     private fun createDomainAccount(

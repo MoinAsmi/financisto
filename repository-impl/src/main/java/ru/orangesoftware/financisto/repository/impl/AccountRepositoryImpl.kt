@@ -26,21 +26,21 @@ class AccountRepositoryImpl(
     }
 
     override suspend fun getAccount(id: Long): RepositoryResult<Account> = execute {
-        accountDao.getAccount(id).toDomain()
+        accountDao.getAccountById(id)?.toDomain()
     }
 
     override suspend fun saveAccount(account: Account): RepositoryResult<Long> = execute {
         val storageAccount = account.toStorage()
         if (storageAccount.id == 0L) {
-            accountDao.insertAccount(storageAccount)
+            accountDao.insert(storageAccount)
         } else {
-            accountDao.updateAccount(storageAccount)
+            accountDao.update(storageAccount)
             storageAccount.id
         }
     }
 
     override suspend fun deleteAccount(id: Long): RepositoryResult<Unit> = execute {
-        accountDao.deleteAccount(id)
+        accountDao.delete(id)
     }
 
     override suspend fun updateAccountBalance(id: Long, deltaAmount: Long): RepositoryResult<Unit> = execute {

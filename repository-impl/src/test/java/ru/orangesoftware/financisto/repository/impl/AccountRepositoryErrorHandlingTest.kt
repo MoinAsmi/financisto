@@ -11,6 +11,8 @@ import org.junit.Before
 import org.junit.Test
 import ru.orangesoftware.financisto.repository.api.RepositoryException
 import ru.orangesoftware.financisto.repository.api.RepositoryResult
+import ru.orangesoftware.financisto.repository.api.model.Account
+import ru.orangesoftware.financisto.repository.api.model.AccountType
 import ru.orangesoftware.financisto.storage.api.dao.AccountDao
 
 class AccountRepositoryErrorHandlingTest {
@@ -42,10 +44,14 @@ class AccountRepositoryErrorHandlingTest {
     @Test
     fun `saveAccount should handle validation errors`() = runTest {
         // Given
-        coEvery { accountDao.insertAccount(any()) } throws IllegalArgumentException("Invalid account")
+        coEvery { accountDao.insert(any()) } throws IllegalArgumentException("Invalid account")
 
         // When
-        val result = repository.saveAccount(createDomainAccount(0))
+        val result = repository.saveAccount(Account(
+            title = "TODO()",
+            currencyId = 1,
+            type = AccountType.CREDIT_CARD
+        ))
 
         // Then
         assertThat(result).isInstanceOf(RepositoryResult.Error::class.java)
@@ -57,7 +63,7 @@ class AccountRepositoryErrorHandlingTest {
     @Test
     fun `deleteAccount should handle non-existent account`() = runTest {
         // Given
-        coEvery { accountDao.deleteAccount(any()) } throws IllegalArgumentException("Account not found")
+        coEvery { accountDao.delete(any()) } throws IllegalArgumentException("Account not found")
 
         // When
         val result = repository.deleteAccount(999)

@@ -11,11 +11,11 @@ class AccountDaoImpl(
     override fun getAccounts(): Flow<List<Account>> =
         accountRoomDao.getAccounts().map { it.map { accountEntity -> accountEntity.toDomain() } }
 
-    override fun getActiveAccounts(): Flow<List<Account>> =
-        accountRoomDao.getActiveAccounts().map { it.map { accountEntity -> accountEntity.toDomain() } }
+    override fun getAccountsByStatus(isActive: Boolean): Flow<List<Account>> =
+        accountRoomDao.getAccountsByStatus(if (isActive) 1 else 0).map { it.map { accountEntity -> accountEntity.toDomain() } }
 
-    override fun getAccountById(id: Long): Flow<Account?> =
-        accountRoomDao.getAccountById(id).map { it.toDomain() }
+    override fun getAccountById(id: Long): Account? =
+        accountRoomDao.getAccountById(id)?.toDomain()
 
     override suspend fun insert(account: Account): Long =
         accountRoomDao.insert(AccountEntity.fromDomain(account))
