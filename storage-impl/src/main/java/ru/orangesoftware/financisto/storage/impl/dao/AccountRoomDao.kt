@@ -3,29 +3,37 @@ package ru.orangesoftware.financisto.storage.impl.dao
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import ru.orangesoftware.financisto.storage.impl.entities.AccountEntity
+import ru.orangesoftware.financisto.storage.impl.entities.AccountWithCurrency
 
 @Dao
 interface AccountRoomDao {
     @Transaction
-    @Query("SELECT * FROM accounts ORDER BY sortOrder, title")
-    fun getAccounts(): Flow<List<AccountEntity>>
+    @Query("""
+        SELECT a.* FROM accounts a 
+        ORDER BY a.sortOrder, a.title
+    """)
+    fun getAccounts(): Flow<List<AccountWithCurrency>>
 
     @Transaction
-    @Query("SELECT * FROM accounts WHERE isActive = :isActive ORDER BY sortOrder, title")
-    fun getAccountsByStatus(isActive: Int): Flow<List<AccountEntity>>
+    @Query("""
+        SELECT a.* FROM accounts a 
+        WHERE a.isActive = :isActive 
+        ORDER BY a.sortOrder, a.title
+    """)
+    fun getAccountsByStatus(isActive: Boolean): Flow<List<AccountWithCurrency>>
 
     @Transaction
     @Query("SELECT * FROM accounts WHERE id = :id")
-    fun getAccountById(id: Long): AccountEntity?
+    suspend fun getAccount(id: Long): AccountWithCurrency?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(account: AccountEntity): Long
+    suspend fun insertAccount(account: AccountEntity): Long
 
     @Update
-    suspend fun update(account: AccountEntity)
+    suspend fun updateAccount(account: AccountEntity)
 
-    @Query("DELETE FROM accounts WHERE id = :accountId")
-    suspend fun delete(accountId: Long)
+    @Delete
+    suspend fun deleteAccount(account: AccountEntity)
 
     @Query("UPDATE accounts SET totalAmount = :totalAmount WHERE id = :accountId")
     suspend fun updateAccountBalance(accountId: Long, totalAmount: Long)
