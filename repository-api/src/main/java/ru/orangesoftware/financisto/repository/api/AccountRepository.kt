@@ -1,7 +1,7 @@
 package ru.orangesoftware.financisto.repository.api
 
 import kotlinx.coroutines.flow.Flow
-import ru.orangesoftware.financisto.repository.api.model.Account
+import ru.orangesoftware.financisto.storage.api.entities.Account
 
 interface AccountRepository {
     /**
@@ -23,10 +23,10 @@ interface AccountRepository {
     suspend fun saveAccount(account: Account): RepositoryResult<Long>
 
     /**
-     * Delete an account by its ID.
+     * Delete an account
      * This will fail if there are any transactions associated with the account.
      */
-    suspend fun deleteAccount(id: Long): RepositoryResult<Unit>
+    suspend fun deleteAccount(account: Account): RepositoryResult<Unit>
 
     /**
      * Get accounts filtered by their active status
