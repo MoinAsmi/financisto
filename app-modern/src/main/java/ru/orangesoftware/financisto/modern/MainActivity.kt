@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import ru.orangesoftware.financisto.feature.account.presentation.AccountListFragment
+import ru.orangesoftware.financisto.feature.account.presentation.AccountListFragmentDirections
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -14,7 +16,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        
+
         // Set up the ActionBar with navigation
         setupActionBarWithNavController(navController)
     }

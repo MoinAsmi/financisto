@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    namespace 'ru.orangesoftware.financisto.feature.account.create'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 33
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+    implementation project(':usecase-api')
+    implementation project(':usecase-impl')
+    implementation project(':storage-api')
+    implementation project(':storage-impl')
+    implementation project(':navigation')
+    implementation project(':repository-api')
+    implementation project(':repository-impl')
+
+    // DI
+    implementation 'io.insert-koin:koin-android:3.4.3'
+    
+    // AndroidX
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.7'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.ext.nav_version}"
+    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.ext.nav_version}"
+    implementation 'com.google.android.material:material:1.9.0'
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="create_account">Create Account</string>
+    <string name="title">Title</string>
+    <string name="account_type">Account Type</string>
+    <string name="currency">Currency</string>
+    <string name="initial_balance">Initial Balance</string>
+    <string name="note">Note</string>
+    <string name="include_in_totals">Include in Totals</string>
+    <string name="create">Create</string>
+    <string name="error_title_required">Title is required</string>
+    <string name="error_currency_required">Currency is required</string>
+    <string name="error_invalid_amount">Invalid amount</string>
+    <string name="account_created">Account created successfully</string>
+</resources>

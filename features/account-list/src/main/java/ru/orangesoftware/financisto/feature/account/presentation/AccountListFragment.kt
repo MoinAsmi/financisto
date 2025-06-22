@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import ru.orangesoftware.financisto.feature.account.R
 import ru.orangesoftware.financisto.feature.account.databinding.FragmentAccountListBinding
+import ru.orangesoftware.financisto.navigation.AccountListNavigator
 import ru.orangesoftware.financisto.storage.api.entities.Account
 
 class AccountListFragment : Fragment(R.layout.fragment_account_list) {
@@ -24,6 +25,7 @@ class AccountListFragment : Fragment(R.layout.fragment_account_list) {
     private val binding get() = _binding!!
 
     private val viewModel: AccountListViewModel by inject()
+    private val navigator: AccountListNavigator by inject()
     
     private val accountAdapter = AccountListAdapter(
         onItemClick = { account -> viewModel.onEvent(AccountListEvent.ToggleExpanded(account.id)) },
@@ -131,19 +133,19 @@ class AccountListFragment : Fragment(R.layout.fragment_account_list) {
 
     private fun navigateToTransactions(accountId: Long) {
         findNavController().navigate(
-            AccountListFragmentDirections.actionAccountListToTransactions(accountId)
+            navigator.toTransactions(accountId)
         )
     }
 
     private fun navigateToEditAccount(accountId: Long) {
         findNavController().navigate(
-            AccountListFragmentDirections.actionAccountListToEditAccount(accountId)
+            navigator.toEditAccount(accountId)
         )
     }
 
     private fun navigateToCreateAccount() {
         findNavController().navigate(
-            AccountListFragmentDirections.actionAccountListToCreateAccount()
+           navigator.toCreateAccount()
         )
     }
 }

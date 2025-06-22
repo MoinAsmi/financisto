@@ -7,6 +7,52 @@
     <fragment
         android:id="@+id/accountListFragment"
         android:name="ru.orangesoftware.financisto.feature.account.presentation.AccountListFragment"
-        android:label="AccountListFragment" />
+        android:label="AccountListFragment">
+
+        <action
+            android:id="@+id/action_accountList_to_transactions"
+            app:destination="@id/transactionsFragment">
+            <argument
+                android:name="accountId"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_accountList_to_editAccount"
+            app:destination="@id/editAccountFragment">
+            <argument
+                android:name="accountId"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_accountList_to_createAccount"
+            app:destination="@id/createAccountFragment" />
+    </fragment>
+
+    <!-- These are placeholder destinations that will be defined in other feature modules -->
+    <fragment
+        android:id="@+id/transactionsFragment"
+
+        android:label="TransactionsFragment">
+        <argument
+            android:name="accountId"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editAccountFragment"
+
+        android:label="EditAccountFragment">
+        <argument
+            android:name="accountId"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="ru.orangesoftware.financisto.feature.account.create.presentation.CreateAccountFragment"
+        android:label="CreateAccountFragment" />
+
 
 </navigation>

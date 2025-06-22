@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/createAccountFragment"
-        android:name="ru.orangesoftware.financisto.feature.account.edit.CreateAccountFragment"
+        android:name="ru.orangesoftware.financisto.feature.account.create.presentation.CreateAccountFragment"
         android:label="CreateAccountFragment" />
 
 </navigation>

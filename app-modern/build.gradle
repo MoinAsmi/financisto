@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -42,6 +43,7 @@ dependencies {
     implementation project(':repository-impl')
     implementation project(':usecase-impl')
     implementation project(':features:account-list')
+    implementation project(':features:account-create')
     implementation project(':navigation')
     
     // AndroidX

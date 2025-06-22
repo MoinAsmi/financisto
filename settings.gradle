@@ -33,6 +33,7 @@ include ':usecase-impl'
 
 // Feature modules
 include ':features:account-list'
+include ':features:account-create'
 
 // Navigation
 include ':navigation'
