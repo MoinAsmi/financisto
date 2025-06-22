@@ -24,12 +24,20 @@ abstract class FinancistoDatabase : RoomDatabase() {
     companion object {
         private const val DATABASE_NAME = "financisto_modern.db"
 
-        fun create(context: Context): FinancistoDatabase {
+        fun provideDatabase(context: Context): FinancistoDatabase {
             return Room.databaseBuilder(
                 context.applicationContext,
                 FinancistoDatabase::class.java,
                 DATABASE_NAME
             ).build()
+        }
+
+        fun provideAccountDao(db: FinancistoDatabase): AccountRoomDao {
+            return db.accountDao()
+        }
+
+        fun provideCurrencyDao(db: FinancistoDatabase): CurrencyRoomDao {
+            return db.currencyDao()
         }
     }
 }

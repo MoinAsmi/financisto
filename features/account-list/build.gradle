@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -27,7 +28,16 @@ android {
 
 dependencies {
     implementation project(':usecase-api')
+    implementation project(':usecase-impl')
+    implementation project(':storage-api')
+    implementation project(':storage-impl')
     implementation project(':navigation')
+    implementation project(':repository-api')
+    implementation project(':repository-impl')
+
+    // DI
+    implementation 'io.insert-koin:koin-android:3.4.3'
+//    implementation 'io.insert-koin:koin-androidx-viewmodel:3.4.3'
     
     // AndroidX
     implementation 'androidx.core:core-ktx:1.10.1'
@@ -36,11 +46,31 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
-    
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.ext.nav_version}"
+    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.ext.nav_version}"
+
     // UI
     implementation 'com.google.android.material:material:1.9.0'
     
     // Core dependencies
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.20'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+
+    // Test dependencies
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1'
+    testImplementation 'io.mockk:mockk:1.13.5'
+    testImplementation 'app.cash.turbine:turbine:1.0.0'
+    testImplementation 'io.insert-koin:koin-test:3.4.3'
+    testImplementation 'io.insert-koin:koin-test-junit4:3.4.3'
+    
+    // Android Test dependencies
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'io.mockk:mockk-android:1.13.5'
+    androidTestImplementation 'androidx.fragment:fragment-testing:1.5.7'
 }

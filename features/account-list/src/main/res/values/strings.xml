@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Account List -->
+    <string name="accounts">Accounts</string>
+    <string name="add_account">Add Account</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="transactions">Transactions</string>
+    <string name="refresh">Refresh</string>
+    <string name="show_inactive">Show Inactive</string>
+    
+    <!-- Dialogs -->
+    <string name="delete_account_title">Delete Account</string>
+    <string name="delete_account_message">Are you sure you want to delete this account? All associated transactions will be deleted as well.</string>
+    
+    <!-- Error Messages -->
+    <string name="delete_account_error">Failed to delete account: %s</string>
+    <string name="update_balance_error">Failed to update balance: %s</string>
+    <string name="retry">Retry</string>
+</resources>

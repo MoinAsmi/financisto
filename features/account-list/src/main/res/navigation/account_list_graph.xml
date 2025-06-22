@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/account_graph"
+    app:startDestination="@id/accountListFragment">
+
+    <fragment
+        android:id="@+id/accountListFragment"
+        android:name="ru.orangesoftware.financisto.feature.account.presentation.AccountListFragment"
+        android:label="AccountListFragment">
+
+        <action
+            android:id="@+id/action_accountList_to_transactions"
+            app:destination="@id/transactionsFragment">
+            <argument
+                android:name="accountId"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_accountList_to_editAccount"
+            app:destination="@id/editAccountFragment">
+            <argument
+                android:name="accountId"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_accountList_to_createAccount"
+            app:destination="@id/createAccountFragment" />
+    </fragment>
+
+    <!-- These are placeholder destinations that will be defined in other feature modules -->
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="ru.orangesoftware.financisto.feature.transaction.TransactionsFragment"
+        android:label="TransactionsFragment">
+        <argument
+            android:name="accountId"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editAccountFragment"
+        android:name="ru.orangesoftware.financisto.feature.account.edit.EditAccountFragment"
+        android:label="EditAccountFragment">
+        <argument
+            android:name="accountId"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="ru.orangesoftware.financisto.feature.account.edit.CreateAccountFragment"
+        android:label="CreateAccountFragment" />
+
+</navigation>

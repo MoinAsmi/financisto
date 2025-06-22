@@ -4,6 +4,7 @@ buildscript {
     ext {
         kotlin_version = '1.8.20'
         agp_version = '7.4.0'
+        nav_version = '2.5.3'  // Downgrade to a version that supports Java 11
     }
     
     repositories {
@@ -13,6 +14,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:${agp_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${nav_version}"
     }
 }
 
